@@ -11,7 +11,7 @@ Your own account is never flagged.
 
 ## Requirements
 
-- [Python 3.11 or newer](https://www.python.org/downloads/)
+- [Python 3.11](https://www.python.org/downloads/)
 - [Cookie-Editor extension](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm?hl=en) for Chrome
 
 ## Setup Guide
