@@ -1,0 +1,12 @@
+data/
+docs/
+logs/
+cookies.txt
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+.idea/
+.vscode/
