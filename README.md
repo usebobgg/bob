@@ -84,18 +84,16 @@ python fetch_comments.py <link to a post>
 
 ## How a Run Works
 
-1. The comments and replies are fetched without your login and saved to `data/`.
-2. The saved comments are scanned and the flagged ones are listed.
-3. With `--confirm`, the flagged comments are deleted one by one, 3 to 8 seconds apart. The script stops at the first failure.
-4. A run that stops partway continues where it left off next time. When everything flagged is deleted, the saved comments move to `data/done/` and the next run fetches fresh ones.
+1. Comments and replies are fetched and saved to `data/`.
+2. Flagged comments are listed.
+3. With `--confirm`, they are deleted a few seconds apart.
 
-Every action is also written to `logs/tiktok.jsonl`, including the author and full text of each deleted comment.
+An interrupted run resumes where it stopped. Every deletion is logged to `logs/tiktok.jsonl`.
 
 ## Good to Know
 
-- **Deleted comments cannot be restored.** Read the list before you use `--confirm`, and start with `--limit 3`.
-- **It only works on your own posts.** TikTok does not let anyone else delete comments there, and the script refuses other people's posts.
-- **`cookies.txt` is your login.** Anyone who has it can use your account. Do not share it. It is excluded from git by `.gitignore`.
-- **Cookies expire.** When `check_login.py` says the login is not valid, export them again.
-- **A short genuine reply can be flagged**, for example a fan replying "lol" under two comments. This is why the list is shown first.
-- **This uses TikTok's website, not an official API.** Automated access is against TikTok's terms of service, and TikTok may show a captcha or restrict an account. The scripts pace their requests and stop when they are blocked. Use it at your own risk.
+- Deleted comments cannot be restored. Start with `--limit 3`.
+- It only works on your own posts.
+- `cookies.txt` is your login. Never share it.
+- When the login stops working, export your cookies again.
+- Automated access is against TikTok's terms of service. Use it at your own risk.
