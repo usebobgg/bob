@@ -2,7 +2,16 @@
 
 Aid against spammers and scammers on your TikTok videos. It scans the comments on one of your posts, flags bot replies, shows you the list, and deletes them only after you confirm.
 
-## What it flags
+## Table of Contents
+
+- [What It Flags](#what-it-flags)
+- [Requirements](#requirements)
+- [Setup Guide](#setup-guide)
+- [Usage](#usage)
+- [How a Run Works](#how-a-run-works)
+- [Good to Know](#good-to-know)
+
+## What It Flags
 
 - **Duplicate replies:** the same account posts the same reply under two or more different comments.
 - **Excessive replies:** an account replies under more than three different comments. Every comment from that account is flagged.
@@ -73,7 +82,7 @@ To only download the comments and replies of any public post:
 python fetch_comments.py <link to a post>
 ```
 
-## How a run works
+## How a Run Works
 
 1. The comments and replies are fetched without your login and saved to `data/`.
 2. The saved comments are scanned and the flagged ones are listed.
@@ -82,7 +91,7 @@ python fetch_comments.py <link to a post>
 
 Every action is also written to `logs/tiktok.jsonl`, including the author and full text of each deleted comment.
 
-## Good to know
+## Good to Know
 
 - **Deleted comments cannot be restored.** Read the list before you use `--confirm`, and start with `--limit 3`.
 - **It only works on your own posts.** TikTok does not let anyone else delete comments there, and the script refuses other people's posts.
