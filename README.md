@@ -1,67 +1,52 @@
 # Bob
 
-Bob is a free TikTok antibot: an aid against spammers and scammers on your videos. It scans the comments on one of your posts, flags bot replies, shows you the list, and deletes them only after you confirm. Bob runs on your own computer and opens in your browser.
+**Delete the bot replies under your TikTok posts.** Free, open source, and it runs on your own computer.
 
-## Table of Contents
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue) ![macOS and Windows](https://img.shields.io/badge/runs%20on-macOS%20%7C%20Windows-lightgrey) ![Runs locally](https://img.shields.io/badge/your%20login-stays%20on%20your%20computer-brightgreen)
 
-- [What It Flags](#what-it-flags)
-- [Requirements](#requirements)
-- [Setup](#setup)
-- [Getting Your Login](#getting-your-login)
-- [Using Bob](#using-bob)
-- [Command Line](#command-line)
-- [Good to Know](#good-to-know)
+![Bob showing 8 bot replies from 2 accounts, ready to delete](media/bob.png)
 
-## What It Flags
+## Quick Start
 
-- **Duplicate replies:** the same account posts the same reply under two or more different comments.
-- **Excessive replies:** an account replies under more than three different comments. Every comment from that account is flagged.
+1. Install [Python](https://www.python.org/downloads/).
+2. [Download Bob](https://github.com/usebobgg/bob/archive/refs/heads/main.zip) and unzip it.
+3. Double-click `start.command` (Mac) or `start.bat` (Windows).
 
-Several replies under one comment count once, and your own account is never flagged. Both limits can be changed in Settings.
+Bob opens in your browser and walks you through the rest.
 
-## Requirements
+## How It Works
 
-- [Python 3.11](https://www.python.org/downloads/) or newer
-- [Cookie-Editor extension](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm?hl=en) for Chrome
+| Step | What Happens |
+| --- | --- |
+| **Connect** | Bob shows you how to copy your TikTok login. Drop it in. |
+| **Scan** | Paste the link to your post. Nothing is deleted yet. |
+| **Review** | Bot replies are tinted red. Press **Keep** on anything genuine. |
+| **Delete** | Confirm, and Bob removes them a few seconds apart. |
 
-## Setup
+## What Counts as a Bot
 
-1. Download this folder: press **Code**, then **Download ZIP**, and unzip it.
-2. Double-click `start.command` on a Mac, or `start.bat` on Windows.
-3. Your browser opens with Bob. Keep the start window open while you use it.
+| Rule | Example |
+| --- | --- |
+| Same reply under 2 or more comments | "I made $4,200 this week thanks to…" posted everywhere |
+| Replies under more than 3 comments | One account spamming every thread |
 
-The start window explains each thing it does before doing it. It puts everything in a `.venv` folder inside this folder, downloads one library (`curl_cffi`) from pypi.org, and never installs Python without asking. To remove Bob, delete the folder.
+Your own account is never flagged. Both limits can be changed in **Settings**.
 
-On a Mac, the first time you may need to right-click `start.command` and choose **Open**.
+## Is It Safe?
 
-## Getting Your Login
+- Your login is saved in Bob's folder and only ever sent to TikTok.
+- Bob runs on `127.0.0.1`, which is your own computer. Nobody else can open it.
+- The start file tells you what it does before doing it, and installs nothing outside Bob's folder.
+- To remove Bob, delete the folder.
 
-Bob deletes comments as you, so it needs the login from your browser. Bob shows these same steps on screen.
+## Good to Know
 
-**1. Install Cookie-Editor from the Chrome Web Store.**
-
-![Cookie-Editor in the Chrome Web Store](media/cookie-editor.jpg)
-
-**2. Log in on tiktok.com, click the Cookie-Editor icon and choose This site.**
-
-![Cookie-Editor permission request](media/cookie-editor-permissions.jpg)
-
-**3. Click the icon again, press Export, then JSON.**
-
-![Cookie-Editor export button](media/cookie-editor-export.jpg)
-
-## Using Bob
-
-1. **Connect.** Drag your cookie file onto the dashed box, or press Ctrl V to paste what Cookie-Editor copied.
-2. **Scan.** Paste the link to one of your posts. Video links, photo links and short share links all work. Nothing is deleted here.
-3. **Review.** Bot replies are tinted red. Press **Keep** on anything genuine, then press **Delete** and confirm.
-4. **Done.** Open the post on TikTok and check that they are gone.
-
-The sidebar also has **History** (what Bob deleted before), **Settings** (how strict Bob is and how fast it deletes) and **Show Log**.
+- Deleted comments cannot be restored.
+- It only works on your own posts.
+- When your login stops working, connect it again.
+- Automated access is against TikTok's terms of service. Use it at your own risk.
 
 ## Command Line
-
-The same tools work without the browser:
 
 ```
 python check_login.py
@@ -70,12 +55,4 @@ python delete_comments.py <link to your post>
 python delete_comments.py <link to your post> --confirm
 ```
 
-`delete_comments.py` only lists what it would delete unless you add `--confirm`. `--limit 10` caps a run and `--refresh` fetches the comments again.
-
-## Good to Know
-
-- Deleted comments cannot be restored.
-- It only works on your own posts.
-- `cookies.txt` is your login. Never share it.
-- When the login stops working, export your cookies again.
-- Automated access is against TikTok's terms of service. Use it at your own risk.
+Without `--confirm`, nothing is deleted.
