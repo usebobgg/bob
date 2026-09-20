@@ -138,7 +138,7 @@ def delete_flagged(
 
 def main(arguments: Sequence[str] | None = None) -> int:
     options = parse_arguments(arguments)
-    configure_logging(LogConfig(file_path = PROJECT_DIRECTORY / 'logs' / 'tiktok.jsonl'))
+    configure_logging(LogConfig(file_path = PROJECT_DIRECTORY / 'logs' / 'bob.jsonl'))
 
     try:
         with create_session(ensure_cookie_file(options.cookies)) as session:
