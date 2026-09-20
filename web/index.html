@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0f0d0d">
+  <meta name="app-token" content="__APP_TOKEN__">
+  <title>Bob - TikTok Antibot</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components/skip-link.css">
+  <link rel="stylesheet" href="styles/components/site-header.css">
+  <link rel="stylesheet" href="styles/components/button.css">
+  <link rel="stylesheet" href="styles/components/stepper.css">
+  <link rel="stylesheet" href="styles/components/sidebar.css">
+  <link rel="stylesheet" href="styles/components/flow.css">
+  <link rel="stylesheet" href="styles/components/field.css">
+  <link rel="stylesheet" href="styles/components/sheet.css">
+  <link rel="stylesheet" href="styles/components/comment.css">
+  <link rel="stylesheet" href="styles/components/review.css">
+  <link rel="stylesheet" href="styles/components/terminal.css">
+  <script type="module" src="scripts/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="app">
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar__top">
+        <a class="brand" href="#/" aria-label="Bob, back to the current step">
+          <img class="brand__mark" src="assets/bob-mark.png" alt="" width="30" height="30">
+          <span class="brand__name sidebar__label">Bob</span>
+        </a>
+        <button class="sidebar__collapse" type="button" data-action="toggle-sidebar" data-sidebar-toggle aria-expanded="true" aria-label="Collapse the sidebar"><svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m11 7-5 5 5 5M18 7l-5 5 5 5"/></svg></button>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Pages">
+        <a class="sidebar__link" href="#/" data-route-link="home"><svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 10.5 12 3.5l8.5 7V20a.5.5 0 0 1-.5.5h-5.25v-6h-5.5v6H4a.5.5 0 0 1-.5-.5z"/></svg><span class="sidebar__label">Home</span></a>
+        <a class="sidebar__link" href="#/history" data-route-link="history"><svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.7-6.2L3.5 8.5"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></svg><span class="sidebar__label">History</span></a>
+        <a class="sidebar__link" href="#/settings" data-route-link="settings"><svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6.5h9M17 6.5h3M4 12h3M11 12h9M4 17.5h11M19 17.5h1"/><circle cx="15" cy="6.5" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17.5" r="2"/></svg><span class="sidebar__label">Settings</span></a>
+        <button class="sidebar__link" type="button" data-action="toggle-log" data-log-toggle aria-expanded="false"><svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="15" rx="1"/><path d="m7 9.5 3 2.5-3 2.5M12.5 14.5H17"/></svg><span class="sidebar__label" data-log-label>Show Log</span></button>
+        <button class="sidebar__link" type="button" data-action="change-login" data-route-link="login"><svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg><span class="sidebar__label">Login</span></button>
+      </nav>
+
+      <p class="sidebar__account" data-session hidden>
+        <span class="sidebar__avatar" data-session-initial aria-hidden="true"></span>
+        <span class="sidebar__label sidebar__handle" data-session-handle></span>
+      </p>
+    </aside>
+
+    <div class="app__main">
+    <header class="site-header">
+      <div class="site-header__bar">
+        <ol class="stepper" aria-label="Steps">
+          <li class="stepper__step" data-step="connect">1. Connect</li>
+          <li class="stepper__step" data-step="scan">2. Scan</li>
+          <li class="stepper__step" data-step="review">3. Review</li>
+          <li class="stepper__step" data-step="done">4. Done</li>
+        </ol>
+      </div>
+    </header>
+
+    <main class="stage container" id="main" tabindex="-1">
+      <div class="stage__copy">
+        <h1 class="stage__title" data-title aria-live="polite"></h1>
+
+        <div class="stage__view" data-view="loading">
+          <p class="stage__text prose">Checking your saved login.</p>
+        </div>
+
+        <div class="stage__view" data-view="connect" hidden>
+          <p class="stage__text prose">Bob deletes comments as you, so it needs the login from your browser. Follow the three steps on the right, then drop or paste it below.</p>
+          <div class="dropzone" data-dropzone tabindex="0" role="group" aria-label="Drop your cookie file here, or paste your export">
+            <svg class="dropzone__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 15.5V4M7.5 8.5 12 4l4.5 4.5"/><path d="M4 15.5V19a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3.5"/></svg>
+            <p class="dropzone__title" data-dropzone-title>Drag your cookie file here</p>
+            <p class="dropzone__text">or press <kbd class="dropzone__key">Ctrl</kbd> <kbd class="dropzone__key">V</kbd> to paste it</p>
+          </div>
+          <button class="text-button" type="button" data-action="cancel-login" hidden>Keep Current Login</button>
+          <p class="stage__note">Your login is saved in this folder on your computer. It is only ever sent to TikTok.</p>
+        </div>
+
+        <div class="stage__view" data-view="ready" hidden>
+          <p class="stage__text prose">Open one of your posts on TikTok, copy its link and paste it here. Video links, photo links and short share links all work.</p>
+          <form class="field field--inline" data-form="scan">
+            <label class="visually-hidden" for="url-input">Link to your post</label>
+            <input class="field__input" id="url-input" name="url" type="url" inputmode="url" autocomplete="off" placeholder="https://www.tiktok.com/@you/video/…" required>
+            <button class="button" type="submit">Scan</button>
+          </form>
+          <p class="stage__note">Nothing is deleted yet. You get to look at everything first.</p>
+        </div>
+
+        <div class="stage__view" data-view="scanning" hidden>
+          <p class="stage__text prose" data-progress></p>
+          <div class="field__actions">
+            <button class="button button--light" type="button" data-action="stop">Stop</button>
+          </div>
+          <p class="stage__note">Bob reads slowly on purpose so TikTok does not block it. Busy posts take a few minutes.</p>
+        </div>
+
+        <div class="stage__view" data-view="review" hidden>
+          <p class="stage__text prose" data-review-text></p>
+          <div class="field__actions" data-review-actions>
+            <button class="button" type="button" data-action="ask-delete" data-delete-label></button>
+            <button class="button button--light" type="button" data-action="reset" data-review-reset>Scan Another Post</button>
+          </div>
+          <div class="confirm" data-confirm hidden>
+            <p class="confirm__text">Deleted comments cannot be brought back.</p>
+            <div class="field__actions">
+              <button class="button" type="button" data-action="delete" data-confirm-label></button>
+              <button class="button button--light" type="button" data-action="cancel-delete">Cancel</button>
+            </div>
+          </div>
+          <ul class="stage__links">
+            <li><button class="text-button" type="button" data-action="rescan">Read the Comments Again</button></li>
+            <li data-review-another><button class="text-button" type="button" data-action="reset">Scan Another Post</button></li>
+          </ul>
+        </div>
+
+        <div class="stage__view" data-view="deleting" hidden>
+          <p class="stage__text prose">Comments are removed a few seconds apart. You can stop at any time and carry on later.</p>
+          <div class="field__actions">
+            <button class="button button--light" type="button" data-action="stop">Stop</button>
+          </div>
+        </div>
+
+        <div class="stage__view" data-view="done" hidden>
+          <p class="stage__text prose">Open the post on TikTok and check that they are gone. New bots can show up later, so scan again whenever you like.</p>
+          <div class="field__actions">
+            <button class="button" type="button" data-action="reset">Scan Another Post</button>
+          </div>
+        </div>
+
+        <div class="stage__view" data-view="history" hidden>
+          <p class="stage__text prose" data-history-text></p>
+          <ol class="runs" data-history-runs></ol>
+          <div class="field__actions">
+            <a class="button button--light" href="#/">Back</a>
+          </div>
+        </div>
+
+        <form class="stage__view" data-view="settings" data-form="settings" hidden>
+          <p class="stage__text prose">These decide what counts as a bot and how fast Bob deletes. The normal values work for most people.</p>
+          <div class="settings">
+            <div class="setting">
+              <label class="setting__label" for="setting-duplicates">Repeat Limit</label>
+              <input class="field__input field__input--number" id="setting-duplicates" name="minimum_duplicate_parents" type="number" min="2" max="10" step="1" required>
+              <p class="setting__hint">Flag an account that posts the same reply under this many comments. Normally 2.</p>
+            </div>
+            <div class="setting">
+              <label class="setting__label" for="setting-replies">Reply Limit</label>
+              <input class="field__input field__input--number" id="setting-replies" name="maximum_distinct_parents" type="number" min="1" max="20" step="1" required>
+              <p class="setting__hint">Flag an account that replies under more than this many comments. Normally 3.</p>
+            </div>
+            <div class="setting">
+              <label class="setting__label" for="setting-pause-min">Shortest Pause</label>
+              <input class="field__input field__input--number" id="setting-pause-min" name="minimum_delete_delay_seconds" type="number" min="1" max="60" step="0.5" required>
+              <p class="setting__hint">Seconds between deletes, at least. Normally 3.</p>
+            </div>
+            <div class="setting">
+              <label class="setting__label" for="setting-pause-max">Longest Pause</label>
+              <input class="field__input field__input--number" id="setting-pause-max" name="maximum_delete_delay_seconds" type="number" min="1" max="60" step="0.5" required>
+              <p class="setting__hint">Seconds between deletes, at most. Normally 8.</p>
+            </div>
+          </div>
+          <div class="field__actions">
+            <button class="button" type="submit">Save</button>
+            <a class="button button--light" href="#/">Back</a>
+            <button class="text-button" type="button" data-action="reset-settings">Use Normal Values</button>
+          </div>
+        </form>
+
+        <p class="notice" data-notice role="status" aria-live="polite" hidden></p>
+      </div>
+
+      <article class="sheet sheet--empty" data-sheet="comments" aria-label="Comments on your post">
+        <header class="sheet__header sheet__header--split">
+          <p><span class="sheet__count" data-sheet-count>0</span> <span data-sheet-noun>comments</span></p>
+          <div class="segmented" data-filter hidden role="group" aria-label="Which comments to show">
+            <button class="segmented__option segmented__option--active" type="button" data-filter-value="flagged" aria-pressed="true">Bots</button>
+            <button class="segmented__option" type="button" data-filter-value="all" aria-pressed="false">Everyone</button>
+          </div>
+        </header>
+        <ol class="sheet__list" data-sheet-list tabindex="0" aria-label="Comments"></ol>
+        <p class="sheet__empty" data-sheet-empty>Comments from your post show up here.</p>
+      </article>
+
+      <article class="sheet" data-sheet="guide" aria-label="How to get your login" hidden>
+        <header class="sheet__header">How to get your login</header>
+        <ol class="guide sheet__list" tabindex="0">
+          <li class="guide__step">
+            <h2 class="guide__title">Install Cookie-Editor</h2>
+            <p class="guide__text">A free Chrome extension that can copy your login. <a href="https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm?hl=en" target="_blank" rel="noopener">Open it in the Chrome Web Store</a> and press Add to Chrome.</p>
+            <img class="guide__image" src="assets/cookie-editor.jpg" alt="Cookie-Editor in the Chrome Web Store" width="2196" height="456">
+          </li>
+          <li class="guide__step">
+            <h2 class="guide__title">Open TikTok and allow it</h2>
+            <p class="guide__text">Log in on <a href="https://www.tiktok.com" target="_blank" rel="noopener">tiktok.com</a>. Click the Cookie-Editor icon next to the address bar and choose <strong>This site</strong>.</p>
+            <img class="guide__image" src="assets/cookie-editor-permissions.jpg" alt="Cookie-Editor asking for permission, with This site highlighted" width="986" height="350">
+          </li>
+          <li class="guide__step">
+            <h2 class="guide__title">Export as JSON</h2>
+            <p class="guide__text">Click the icon again, press <strong>Export</strong> in the bottom corner, then <strong>JSON</strong>. Your login is now copied. Come back here and press Ctrl V.</p>
+            <img class="guide__image guide__image--tall" src="assets/cookie-editor-export.jpg" alt="Cookie-Editor with the Export button highlighted" width="992" height="1006">
+          </li>
+        </ol>
+      </article>
+    </main>
+
+    <section class="drawer" data-drawer aria-label="Activity log" hidden>
+      <div class="terminal__screen drawer__screen" data-terminal tabindex="0" role="log"></div>
+    </section>
+
+    </div>
+  </div>
+</body>
+</html>

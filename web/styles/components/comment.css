@@ -1,0 +1,117 @@
+.comment {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.45s var(--ease-out) 0.2s;
+}
+
+.comment__clip {
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.comment__content {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  gap: var(--space-md);
+  padding-block: 10px;
+  padding-inline: var(--space-lg);
+  transition: background 0.3s, opacity 0.35s;
+}
+
+.comment__avatar {
+  display: grid;
+  place-items: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 50%;
+  color: var(--color-on-avatar);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.comment__author {
+  color: var(--color-text-faint);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.comment__creator {
+  margin-inline-start: 6px;
+  color: var(--color-accent-text);
+}
+
+.comment__text {
+  font-size: 15px;
+  line-height: 1.38;
+  overflow-wrap: anywhere;
+}
+
+.comment__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--space-lg);
+  margin-block-start: 3px;
+  color: var(--color-text-faint);
+  font-size: 13px;
+}
+
+.comment__reason {
+  display: none;
+  color: var(--color-accent-text);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.comment__likes {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 2px;
+  padding-block-start: 14px;
+  color: var(--color-text-faint);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.comment__heart {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+.comment--reply .comment__content {
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  padding-inline-start: 64px;
+}
+
+.comment--reply .comment__avatar {
+  inline-size: 24px;
+  block-size: 24px;
+  font-size: 11px;
+}
+
+.comment--reading .comment__content {
+  background: var(--color-surface-raised);
+}
+
+.comment--flagged .comment__content {
+  background: var(--color-flag);
+}
+
+.comment--flagged .comment__reason {
+  display: inline;
+}
+
+.comment--deleting .comment__content {
+  opacity: 0;
+}
+
+.comment--deleting .comment__text {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-accent-text);
+}
+
+.comment--deleted {
+  grid-template-rows: 0fr;
+}

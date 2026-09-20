@@ -1,0 +1,70 @@
+.segmented {
+  display: flex;
+  border: 1px solid var(--color-line-soft);
+}
+
+.segmented[hidden] {
+  display: none;
+}
+
+.segmented__option {
+  padding-block: 6px;
+  padding-inline: 12px;
+  border: 0;
+  background: none;
+  color: var(--color-text-faint);
+  font: 400 12px/1.4 var(--font-sans);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.segmented__option:hover {
+  color: var(--color-text);
+}
+
+.segmented__option--active,
+.segmented__option--active:hover {
+  background: var(--color-light);
+  color: var(--color-on-light);
+  font-weight: 500;
+}
+
+.comment__keep {
+  display: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font: 600 13px/1.4 var(--font-sans);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-line);
+  cursor: pointer;
+}
+
+.comment__keep:hover {
+  text-decoration-color: currentColor;
+}
+
+.comment--flagged .comment__keep,
+.comment--kept .comment__keep {
+  display: inline;
+}
+
+.comment--kept .comment__reason {
+  display: inline;
+  color: var(--color-text-faint);
+}
+
+.sheet--locked .comment__keep {
+  display: none;
+}
+
+.confirm__text {
+  color: var(--color-accent-text);
+  font-size: 15px;
+  font-weight: 500;
+}

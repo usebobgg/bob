@@ -1,0 +1,46 @@
+:root {
+  color-scheme: dark;
+
+  --color-page: oklch(0.105 0.003 20);
+  --color-surface: oklch(0.145 0.003 20);
+  --color-surface-raised: oklch(0.2 0.003 20);
+  --color-well: oklch(0.08 0.003 20);
+  --color-text: oklch(0.975 0.002 20);
+  --color-text-soft: oklch(0.76 0.005 20);
+  --color-text-faint: oklch(0.58 0.005 20);
+  --color-on-accent: oklch(0.99 0 0);
+  --color-on-avatar: oklch(0.25 0.02 20);
+  --color-line-soft: oklch(1 0 0 / 0.1);
+  --color-line: oklch(1 0 0 / 0.2);
+  --color-light: oklch(0.91 0.003 20);
+  --color-on-light: oklch(0.13 0.003 20);
+  --color-wash: oklch(0.575 0.22 17 / 0.2);
+  --color-dot: oklch(1 0 0 / 0.07);
+  --color-accent: oklch(0.575 0.22 17);
+  --color-accent-hover: oklch(0.62 0.22 17);
+  --color-accent-text: oklch(0.74 0.16 17);
+  --color-flag: oklch(0.265 0.055 17);
+  --color-terminal-text: oklch(0.88 0.004 20);
+  --color-terminal-dim: oklch(0.56 0.005 20);
+  --color-terminal-ok: oklch(0.78 0.13 150);
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+  --space-section: clamp(56px, 8vw, 104px);
+
+  --radius: 0px;
+  --rail: calc(var(--container) + 80px);
+
+  --container: 1160px;
+  --gutter: clamp(20px, 4vw, 40px);
+
+  --font-sans: "TikTok Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+}
