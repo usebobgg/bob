@@ -31,6 +31,7 @@ from tiktok.models import (
     FetchConfig,
     HttpResponse,
     HttpSession,
+    LoginResult,
     NotLoggedInError,
     PageParseError,
     Profile,
@@ -53,13 +54,17 @@ from tiktok.models import (
 )
 
 __all__ = [
+    'DATA_CENTRE_COOKIE_NAME',
+    'KNOWN_DATA_CENTRES',
     'SESSION_COOKIE_NAME',
     'ScriptId',
     'TikTokClient',
     'build_archive',
+    'connect_login',
     'create_session',
     'ensure_cookie_file',
     'extract_script_json',
+    'format_cookie_header',
     'get_archive_path',
     'get_script_pattern',
     'get_video_url_pattern',
@@ -334,6 +339,8 @@ logger = get_logger(__name__)
 DEFAULT_COOKIE_DOMAIN = '.tiktok.com'
 NETSCAPE_FIELD_COUNT = 7
 SESSION_COOKIE_NAME = 'sessionid'
+DATA_CENTRE_COOKIE_NAME = 'tt-target-idc'
+KNOWN_DATA_CENTRES = ('us-eastred', 'eu-ttp2', 'useast5', 'useast2a', 'useast1a', 'alisg', 'no1a', 'maliva')
 CSRF_HEADER = 'tt-csrf-token'
 BLOCKED_HEADER = 'bdturing-verify'
 LOG_ID_HEADER = 'x-tt-logid'
@@ -369,6 +376,31 @@ def create_session(cookie_path: Path | None = None, cookies: Sequence[Cookie] = 
         session.cookies.set(cookie.name, cookie.value, domain = cookie.domain)
 
     return session
+
+def format_cookie_header(cookies: Sequence[Cookie]) -> str:
+    return '; '.join(f'{cookie.name}={cookie.value}' for cookie in cookies)
+
+def connect_login(
+    cookies: Sequence[Cookie],
+    session_factory: Callable[..., Any] = create_session,
+) -> LoginResult:
+    has_data_centre = any(cookie.name == DATA_CENTRE_COOKIE_NAME for cookie in cookies)
+    candidates: list[tuple[Cookie, ...]] = [tuple(cookies)]
+
+    if not has_data_centre:
+        candidates += [(*cookies, Cookie(name = DATA_CENTRE_COOKIE_NAME, value = data_centre)) for data_centre in KNOWN_DATA_CENTRES]
+
+    for candidate in candidates:
+        with session_factory(cookies = candidate) as session:
+            session_user = TikTokClient(cast(HttpSession, session)).get_session_user()
+
+        if session_user is not None:
+            if len(candidate) > len(cookies):
+                logger.info('found the account data centre', data_centre = candidate[-1].value)
+
+            return LoginResult(session_user = session_user, cookies = candidate)
+
+    return LoginResult(session_user = None, cookies = tuple(cookies))
 
 class TikTokClient:
     def __init__(

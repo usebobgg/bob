@@ -19,6 +19,7 @@ __all__ = [
     'FetchConfig',
     'HttpResponse',
     'HttpSession',
+    'LoginResult',
     'NotLoggedInError',
     'PageParseError',
     'Profile',
@@ -195,6 +196,10 @@ class VideoReference(NamedTuple):
     handle: str | None
     video_id: str
     url: str
+
+class LoginResult(NamedTuple):
+    session_user: SessionUser | None
+    cookies: tuple[Cookie, ...]
 
 class ReplyThread(NamedTuple):
     replies: tuple[Comment, ...]

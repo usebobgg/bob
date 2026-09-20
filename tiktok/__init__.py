@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from tiktok.client import (
+    connect_login,
+    format_cookie_header,
     SESSION_COOKIE_NAME,
     TikTokClient,
     build_archive,
@@ -15,6 +17,7 @@ from tiktok.client import (
 from tiktok.detection import DetectionConfig, DetectionReport, FlaggedComment, FlagReason, detect_spam
 from tiktok.logger import LogConfig, LogLevel, bind, configure_logging, get_logger, set_level
 from tiktok.models import (
+    LoginResult,
     CookieFileError,
     Cookie,
     SessionUser,
@@ -56,6 +59,7 @@ __all__ = [
     'HttpSession',
     'LogConfig',
     'LogLevel',
+    'LoginResult',
     'PageParseError',
     'Profile',
     'ProfileUnavailableError',
@@ -71,9 +75,11 @@ __all__ = [
     'bind',
     'build_archive',
     'configure_logging',
+    'connect_login',
     'create_session',
     'detect_spam',
     'ensure_cookie_file',
+    'format_cookie_header',
     'get_archive_path',
     'get_logger',
     'parse_cookies',

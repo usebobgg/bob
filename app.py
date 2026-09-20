@@ -43,8 +43,10 @@ from tiktok import (
     VideoUrlError,
     bind,
     configure_logging,
+    connect_login,
     create_session,
     detect_spam,
+    format_cookie_header,
     get_archive_path,
     get_logger,
     parse_cookies,
@@ -327,16 +329,15 @@ class Application:
             raise RequestError('This export has no TikTok login in it. Log in on tiktok.com first, then export again.')
 
         try:
-            with self._session_factory(cookies = cookies) as session:
-                session_user = TikTokClient(cast(HttpSession, session)).get_session_user()
+            session_user, working_cookies = connect_login(cookies, self._session_factory)
         except TikTokError as E:
             raise RequestError(describe_error(E), HTTPStatus.BAD_GATEWAY) from E
 
         if session_user is None:
-            raise RequestError('TikTok says this login has expired. Log in on tiktok.com again, then export again.')
+            raise RequestError('TikTok says this login is no longer valid. Log in on tiktok.com, export again, and stay logged in afterwards.')
 
         try:
-            self._cookie_path.write_text(cookie_text, encoding = 'utf-8')
+            self._cookie_path.write_text(format_cookie_header(working_cookies), encoding = 'utf-8')
             self._cookie_path.chmod(0o600)
         except OSError as E:
             raise RequestError('The login could not be saved to this folder.', HTTPStatus.INTERNAL_SERVER_ERROR) from E
