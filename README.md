@@ -1,5 +1,3 @@
-![Bob](media/logo.png)
-
 # Bob
 
 **Delete the bot replies under your TikTok posts.** Free, open source, and it runs on your own computer.
