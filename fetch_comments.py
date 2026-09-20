@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import cast
@@ -40,12 +40,22 @@ def parse_arguments(arguments: Sequence[str] | None) -> argparse.Namespace:
 
     return parser.parse_args(arguments)
 
-def collect_comments(client: TikTokClient, handle: str, video_id: str, limit: int | None) -> tuple[list[Comment], bool]:
+def collect_comments(
+    client: TikTokClient,
+    handle: str,
+    video_id: str,
+    limit: int | None,
+    on_comment: Callable[[Comment], None] | None = None,
+) -> tuple[list[Comment], bool]:
     comments: list[Comment] = []
 
     try:
         for comment in client.iter_comments(handle, video_id, limit = limit):
             comments.append(comment)
+
+            if on_comment is not None:
+                on_comment(comment)
+
             logger.info(
                 'fetched comment',
                 number = len(comments),
@@ -63,12 +73,13 @@ def fetch_archive(
     reference: VideoReference,
     output_directory: Path,
     limit: int | None = None,
+    on_comment: Callable[[Comment], None] | None = None,
 ) -> CommentArchive:
     handle = reference.handle or ''
 
     with bind(handle = handle, video_id = reference.video_id):
         logger.info('fetching comments', handle = handle, video_id = reference.video_id)
-        comments, is_complete = collect_comments(client, handle, reference.video_id, limit)
+        comments, is_complete = collect_comments(client, handle, reference.video_id, limit, on_comment)
         archive = build_archive(
             handle = handle,
             video_id = reference.video_id,
@@ -91,7 +102,7 @@ def fetch_archive(
 def main(arguments: Sequence[str] | None = None) -> int:
     options = parse_arguments(arguments)
     level = LogLevel.DEBUG if options.verbose else LogLevel.INFO
-    configure_logging(LogConfig(level = level, file_path = PROJECT_DIRECTORY / 'logs' / 'tiktok.jsonl'))
+    configure_logging(LogConfig(level = level, file_path = PROJECT_DIRECTORY / 'logs' / 'bob.jsonl'))
 
     try:
         with create_session(options.cookies) as session:

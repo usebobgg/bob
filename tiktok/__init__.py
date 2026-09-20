@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from tiktok.client import (
+    SESSION_COOKIE_NAME,
     TikTokClient,
     build_archive,
     create_session,
     ensure_cookie_file,
     get_archive_path,
+    parse_cookies,
     parse_video_url,
     read_archive,
     write_archive,
@@ -13,6 +15,8 @@ from tiktok.client import (
 from tiktok.detection import DetectionConfig, DetectionReport, FlaggedComment, FlagReason, detect_spam
 from tiktok.logger import LogConfig, LogLevel, bind, configure_logging, get_logger, set_level
 from tiktok.models import (
+    CookieFileError,
+    Cookie,
     SessionUser,
     ArchiveReadError,
     ApiPath,
@@ -41,6 +45,8 @@ __all__ = [
     'BlockedError',
     'Comment',
     'CommentArchive',
+    'Cookie',
+    'CookieFileError',
     'DetectionConfig',
     'DetectionReport',
     'FetchConfig',
@@ -54,6 +60,7 @@ __all__ = [
     'Profile',
     'ProfileUnavailableError',
     'ReplyThread',
+    'SESSION_COOKIE_NAME',
     'SessionUser',
     'TikTokClient',
     'TikTokError',
@@ -69,6 +76,7 @@ __all__ = [
     'ensure_cookie_file',
     'get_archive_path',
     'get_logger',
+    'parse_cookies',
     'parse_video_url',
     'read_archive',
     'set_level',

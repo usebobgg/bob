@@ -53,6 +53,7 @@ from tiktok.models import (
 )
 
 __all__ = [
+    'SESSION_COOKIE_NAME',
     'ScriptId',
     'TikTokClient',
     'build_archive',
@@ -355,18 +356,17 @@ def read_archive(path: Path) -> CommentArchive:
     except (ValueError, KeyError, TypeError) as E:
         raise ArchiveReadError(path, f'unexpected archive format ({E})') from E
 
-def create_session(cookie_path: Path | None = None) -> requests.Session:
+def create_session(cookie_path: Path | None = None, cookies: Sequence[Cookie] = ()) -> requests.Session:
     session = requests.Session(impersonate = 'chrome')
 
-    if cookie_path is None:
-        return session
-
     try:
-        for cookie in read_cookie_file(cookie_path):
-            session.cookies.set(cookie.name, cookie.value, domain = cookie.domain)
+        loaded_cookies = read_cookie_file(cookie_path) if cookie_path is not None else tuple(cookies)
     except CookieFileError:
         session.close()
         raise
+
+    for cookie in loaded_cookies:
+        session.cookies.set(cookie.name, cookie.value, domain = cookie.domain)
 
     return session
 
