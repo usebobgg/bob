@@ -7,6 +7,7 @@ Bob is a free TikTok antibot: an aid against spammers and scammers on your video
 - [What It Flags](#what-it-flags)
 - [Requirements](#requirements)
 - [Setup](#setup)
+- [Getting Your Login](#getting-your-login)
 - [Using Bob](#using-bob)
 - [Command Line](#command-line)
 - [Good to Know](#good-to-know)
@@ -26,25 +27,32 @@ Several replies under one comment count once, and your own account is never flag
 ## Setup
 
 1. Download this folder: press **Code**, then **Download ZIP**, and unzip it.
-2. Open the folder and double-click the start file:
-   - Mac: `start.command`
-   - Windows: `start.bat`
+2. Double-click `start.command` on a Mac, or `start.bat` on Windows.
 3. Your browser opens with Bob. Keep the start window open while you use it.
 
 The start window explains each thing it does before doing it. It puts everything in a `.venv` folder inside this folder, downloads one library (`curl_cffi`) from pypi.org, and never installs Python without asking. To remove Bob, delete the folder.
 
 On a Mac, the first time you may need to right-click `start.command` and choose **Open**.
 
+## Getting Your Login
+
+Bob deletes comments as you, so it needs the login from your browser. Bob shows these same steps on screen.
+
+**1. Install Cookie-Editor from the Chrome Web Store.**
+
+![Cookie-Editor in the Chrome Web Store](media/cookie-editor.jpg)
+
+**2. Log in on tiktok.com, click the Cookie-Editor icon and choose This site.**
+
+![Cookie-Editor permission request](media/cookie-editor-permissions.jpg)
+
+**3. Click the icon again, press Export, then JSON.**
+
+![Cookie-Editor export button](media/cookie-editor-export.jpg)
+
 ## Using Bob
 
-1. **Connect.** Bob shows how to copy your TikTok login with Cookie-Editor. Drag the file onto the dashed box, or press Ctrl V.
-
-   ![Cookie-Editor in the Chrome Web Store](media/cookie-editor.jpg)
-
-   ![Cookie-Editor permission request](media/cookie-editor-permissions.jpg)
-
-   ![Cookie-Editor export button](media/cookie-editor-export.jpg)
-
+1. **Connect.** Drag your cookie file onto the dashed box, or press Ctrl V to paste what Cookie-Editor copied.
 2. **Scan.** Paste the link to one of your posts. Video links, photo links and short share links all work. Nothing is deleted here.
 3. **Review.** Bot replies are tinted red. Press **Keep** on anything genuine, then press **Delete** and confirm.
 4. **Done.** Open the post on TikTok and check that they are gone.
