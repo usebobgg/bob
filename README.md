@@ -49,10 +49,10 @@ Your own account is never flagged. Both limits can be changed in **Settings**.
 ## Command Line
 
 ```
-python check_login.py
-python fetch_comments.py <link to a post>
-python delete_comments.py <link to your post>
-python delete_comments.py <link to your post> --confirm
+python -m scripts.check_login
+python -m scripts.fetch_comments <link to a post>
+python -m scripts.delete_comments <link to your post>
+python -m scripts.delete_comments <link to your post> --confirm
 ```
 
-Without `--confirm`, nothing is deleted.
+Run these from Bob's folder. Without `--confirm`, nothing is deleted.

@@ -21,13 +21,13 @@ from pathlib import Path
 from typing import Any, cast
 from urllib.parse import parse_qs, urlsplit
 
-from delete_comments import (
+from scripts.delete_comments import (
     load_reusable_archive,
     read_deleted_ids,
     retire_archive,
     write_deleted_ids,
 )
-from fetch_comments import DATA_DIRECTORY, PROJECT_DIRECTORY, fetch_archive
+from scripts.fetch_comments import DATA_DIRECTORY, PROJECT_DIRECTORY, fetch_archive
 from tiktok import (
     SESSION_COOKIE_NAME,
     BlockedError,
